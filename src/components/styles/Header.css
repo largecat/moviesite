@@ -1,0 +1,27 @@
+.HeaderDiv {
+  background-color: #354f52;
+  color: #84a98c;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: auto;
+}
+
+.nav-link {
+  text-decoration: none;
+  /* color: tan; */
+  color: #84a98c;
+  margin: 15px;
+}
+
+.navbar-brand {
+  color: #cbf5d4;
+  margin: 5px 20px;
+  font-size: 2rem;
+  font-weight: 200;
+  letter-spacing: 1rem;
+  flex-grow: 0;
+}
+
+/* background-color: #354f52;
+color: #84a98c; */

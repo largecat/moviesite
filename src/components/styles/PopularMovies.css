@@ -1,0 +1,10 @@
+.PopularMovies {
+  display: flex;
+
+  overflow: scroll;
+}
+
+.moviesOverlay {
+  /* background-color: white; */
+  /* height: 700px; */
+}

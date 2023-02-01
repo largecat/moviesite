@@ -1,0 +1,82 @@
+.MovieInfoBoxToggle,
+img {
+  max-height: 400px;
+}
+
+.dropdown-menu {
+  max-width: 300px;
+  white-space: pre-wrap;
+}
+
+/* .MovieInfoBoxToggle,
+#moviePosterButton {
+  /* background-color: #1e555c;
+  color: #edb183;
+  height: auto;
+  width: auto; */
+/* }  */
+
+/* #moviePosterButton {
+  max-height: 400px;
+} */
+
+/* .overview { */
+/* color: rgb(45, 39, 39); */
+/* font-size: 0.9rem;
+  height: auto; */
+/* margin: 0 10px; */
+/* display: flex; */
+/* flex-wrap: wrap; */
+/* display: none; */
+/* } */
+
+/* #infobox_info { */
+/* display: flex;
+  flex-direction: column; */
+
+/* justify-content: space-around; */
+/* width: 100%; */
+/* background-color: aliceblue; */
+/* display: none; */
+/* } */
+
+/* .dropdown-item { */
+/* display: flex; */
+
+/* flex-direction: column;
+}
+
+.dropdown-menu {
+  /* width: 400px; */
+/* display: flex; */
+/* } */
+
+/* .dropdown-menu {
+  max-width: 100%;
+  display: block;
+  transform-origin: bottom;
+  transform: scaleY(0);
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  position: absolute;
+  right: 0%;
+  --bs-dropdown-border-radius: 0;
+}
+
+.dropdown.show .dropdown-menu {
+  opacity: 1;
+  transform: scaleY(1);
+  overflow: visible;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+.MovieInfoBoxToggle > .dropdown-menu {
+  padding: 0;
+  max-width: 100%;
+  --bs-dropdown-bg: '';
+} */
