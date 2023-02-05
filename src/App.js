@@ -16,6 +16,7 @@ import Search from './components/Search';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import { UserContext } from './UserContext';
+import SearchPage from './components/SearchPage';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -77,18 +78,18 @@ const App = () => {
 
   return (
     <div className='App'>
+      {/* <UserContext.Provider value={value}> */}
       <UserContext.Provider value={value}>
         <Header />
-      </UserContext.Provider>
+        {/* </UserContext.Provider> */}
 
-      <UserContext.Provider value={value}>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/userhome' element={<UserHome />} />
           <Route path='/signin' element={<SignIn />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/popular' element={<PopularPage />} />
-          <Route path='/search' element={<Search />} />
+          <Route path='/search' element={<SearchPage />} />
         </Routes>
       </UserContext.Provider>
     </div>

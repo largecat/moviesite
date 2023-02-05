@@ -1,17 +1,29 @@
 import { Carousel } from 'react-bootstrap';
 import React, { useEffect, useMemo, useState } from 'react';
 import MovieInfoBoxToggle from './MovieInfoBox';
+import './styles/MovieInfoBox.css';
 import './styles/PopularMovies.css';
+import { TMDB_API_KEY } from '../api';
+import MovieInfoHorizontal from './MovieInfoHorizontal';
+import MovieInfoVertical from './MovieInfoVertical';
+const API_URL = 'https://api.themoviedb.org/3/movie/popular?api_key=';
 
-const API_URL =
-  'https://api.themoviedb.org/3/movie/popular?api_key=2125c2b4e21021eaa1aee35d9c0fe191';
-
-const PopularMovies = (props) => {
+const PopularMovies = () => {
   const [movies, setMovies] = useState([]);
   const [loadedImages, setLoadedImages] = useState(0);
-  const [showComponent, setShowComponent] = useState(false);
 
-  const moviesMemo = useMemo(
+  useEffect(() => {
+    const movieData = async () => {
+      const res = await fetch(`${API_URL}${TMDB_API_KEY}`);
+      const data = await res.json();
+      console.log('popularmoviespage loaded');
+      console.log(data);
+      setMovies(data.results);
+    };
+    movieData();
+  }, []);
+
+  useMemo(
     () => ({
       movies,
       setMovies,
@@ -19,21 +31,11 @@ const PopularMovies = (props) => {
     [movies, setMovies]
   );
 
-  useEffect(() => {
-    const movieData = async () => {
-      const res = await fetch(API_URL);
-      const data = await res.json();
-      console.log(data);
-      setMovies(data.results);
-    };
-    movieData();
-  }, []);
-
   return (
     <div className='PopularMovies'>
       {movies.map((movie) => {
         return (
-          <MovieInfoBoxToggle
+          <MovieInfoVertical
             as={Carousel.Item}
             movie={movie}
             movies={movies}
@@ -49,5 +51,4 @@ const PopularMovies = (props) => {
     </div>
   );
 };
-
 export default PopularMovies;

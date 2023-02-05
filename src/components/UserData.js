@@ -9,6 +9,7 @@ const UserData = () => {
   const [recentMovies, setRecentMovies] = useState([]);
   const [wantMovies, setWantMovies] = useState([]);
 
+  console.log('currentuser', currentUser);
   useEffect(() => {
     const getUserDocs = async () => {
       const docRef = doc(db, 'users');

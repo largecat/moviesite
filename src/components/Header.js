@@ -8,7 +8,7 @@ const Header = () => {
   const { currentUser, setCurrentUser } = useContext(UserContext);
 
   return (
-    <Navbar bg='dark' variant='dark' expand='md'>
+    <Navbar bg='dark' variant='dark' expand='md' collapseOnSelect>
       <LinkContainer to='/'>
         <Navbar.Brand>MovieSite</Navbar.Brand>
       </LinkContainer>

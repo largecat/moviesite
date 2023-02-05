@@ -1,4 +1,17 @@
-.MovieInfoBoxToggle,
+.MovieInfoHorizontal {
+  width: 100%;
+  height: 100%;
+  background-color: #1e555c;
+  color: #edb183;
+  min-height: 40px;
+}
+.MovieInfoVertical {
+  max-width: 250px;
+  height: auto;
+}
+/* .MovieInfoBoxToggle,
+.MovieInfoHorizontal,
+.MovieInfoVertical,
 img {
   max-height: 400px;
 }
@@ -7,14 +20,15 @@ img {
   max-width: 300px;
   white-space: pre-wrap;
 }
+.MovieInfoBoxToggle,
+.MovieInfoHorizontal,
 
-/* .MovieInfoBoxToggle,
 #moviePosterButton {
-  /* background-color: #1e555c;
+  background-color: #1e555c;
   color: #edb183;
   height: auto;
-  width: auto; */
-/* }  */
+  width: auto;
+} */
 
 /* #moviePosterButton {
   max-height: 400px;

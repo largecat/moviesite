@@ -1,6 +1,5 @@
 .PopularMovies {
   display: flex;
-
   overflow: scroll;
 }
 
