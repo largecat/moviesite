@@ -26,26 +26,26 @@ const SearchPage = () => {
   const handleSearch = async (e) => {
     e.preventDefault();
     // const searchValue = e.target.searchInput.value;
-    console.log(searchQ);
-    if (searchQ) {
-      try {
-        let res = await fetch(
-          `${API_URL}api_key=${TMDB_API_KEY}&query=${searchQ}`
-        );
-        let data = await res.json();
+    // console.log(searchQ);
+    // if (searchQ) {
+    try {
+      let res = await fetch(
+        `${API_URL}api_key=${TMDB_API_KEY}&query=${searchQ}`
+      );
+      let data = await res.json();
 
-        let resArray = data.results.map((item) => {
-          return item;
-        });
-        setResults(resArray);
-        console.log(resArray);
-        console.log(data.results);
-      } catch (error) {
-        console.log(error.code);
-        console.log(error.message);
-      }
-      e.target.reset();
+      let resArray = data.results.map((item) => {
+        return item;
+      });
+      setResults(resArray);
+      console.log(resArray);
+      console.log(data.results);
+    } catch (error) {
+      console.log(error.code);
+      console.log(error.message);
     }
+    e.target.reset();
+    // }
   };
 
   return (
@@ -57,7 +57,7 @@ const SearchPage = () => {
         setResults={setResults}
       />
       <div className='results-display'>
-        {searchQ && <h4>Results for "{searchQ}"</h4>}
+        {results.length > 0 && <h4>Results for "{searchQ}"</h4>}
         {results.map((movie) => {
           return (
             // <div key={movie.id}>
