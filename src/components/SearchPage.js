@@ -25,6 +25,7 @@ const SearchPage = () => {
 
   const handleSearch = async (e) => {
     e.preventDefault();
+
     // const searchValue = e.target.searchInput.value;
     // console.log(searchQ);
     // if (searchQ) {
@@ -56,6 +57,7 @@ const SearchPage = () => {
         results={results}
         setResults={setResults}
       />
+
       <div className='results-display'>
         {results.length > 0 && <h4>Results for "{searchQ}"</h4>}
         {results.map((movie) => {

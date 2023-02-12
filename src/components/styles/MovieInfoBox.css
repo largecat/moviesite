@@ -6,9 +6,19 @@
   min-height: 40px;
 }
 .MovieInfoVertical {
-  max-width: 250px;
+  min-width: 200px;
+  max-width: 300px;
   height: auto;
 }
+/* .MovieInfoVertical { */
+/* max-width: 250px; */
+/* height: auto; */
+
+/* display: flex; */
+
+/* max-width: 200px; */
+/* } */
+
 /* .MovieInfoBoxToggle,
 .MovieInfoHorizontal,
 .MovieInfoVertical,

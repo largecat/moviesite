@@ -1,7 +1,6 @@
 // Import the functions you need from the SDKs you need
 
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore/lite';
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -9,6 +8,7 @@ import {
   signOut,
   updateProfile,
 } from 'firebase/auth';
+import { setDoc, doc, collection, getFirestore } from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 
@@ -30,7 +30,7 @@ export const auth = getAuth(app);
 
 export const registerNewUser = async (auth, email, password, name) => {
   try {
-    const user = await createUserWithEmailAndPassword(
+    const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
       password
@@ -45,6 +45,24 @@ export const registerNewUser = async (auth, email, password, name) => {
       displayName: name,
       photoURL: '#',
     });
+    const userId = userCredential.user.uid;
+    // const usersRef = collection(db, 'users');
+    await setDoc(doc(db, '/users', userId), {
+      uid: userId,
+      displayName: name,
+      recentlyWatched: [],
+      favorites: [],
+    });
+
+    // setDoc(
+    //   doc(usersRef, userId, {
+    //     uid: userId,
+    //     displayName: name,
+    //     favColor: 'orange',
+    //   })
+    // );
+    console.log(userCredential);
+    console.log(userId);
   } catch (error) {
     console.log(error);
     console.log(error.code);

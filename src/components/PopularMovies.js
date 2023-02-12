@@ -1,7 +1,7 @@
 import { Carousel } from 'react-bootstrap';
 import React, { useEffect, useMemo, useState } from 'react';
 import MovieInfoBoxToggle from './MovieInfoBox';
-import './styles/MovieInfoBox.css';
+// import './styles/MovieInfoBox.css';
 import './styles/PopularMovies.css';
 import { TMDB_API_KEY } from '../api';
 import MovieInfoHorizontal from './MovieInfoHorizontal';
@@ -36,7 +36,8 @@ const PopularMovies = () => {
       {movies.map((movie) => {
         return (
           <MovieInfoVertical
-            as={Carousel.Item}
+            // img-style={{ width: '200px' }}
+            // as={Carousel.Item}
             movie={movie}
             movies={movies}
             key={movie.id}

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/MovieInfoBox.css';
 
-
 const MovieInfoBoxToggle = (props) => {
   const { title, overview, release_date, poster_path, vote_average } =
     props.movie;
@@ -23,10 +22,10 @@ const MovieInfoBoxToggle = (props) => {
     let img = new Image();
     img.src = `https://image.tmdb.org/t/p/original${poster_path}`;
     img.onload = async () => {
-      setImg(img);
-      // setImgLoaded(true);
+      await setImg(img);
+      setImgLoaded(true);
     };
-  }, [imgLoaded]);
+  }, [imgLoaded, poster_path]);
 
   return (
     <div className='MovieInfoBoxToggle d-flex flex-column'>

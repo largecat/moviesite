@@ -4,6 +4,16 @@ import { Card, Header, Form } from 'react-bootstrap';
 const MovieInfoHorizontal = (props) => {
   const { title, overview, release_date, poster_path, vote_average } =
     props.movie;
+
+  const posterSrcLink = 'https://image.tmdb.org/t/p/original';
+
+  const handleCheck = (e, title, poster_path) => {
+    console.log('checkedd');
+    console.log(e.target.checked);
+    console.log(title);
+    console.log(poster_path);
+  };
+
   return (
     <Card className='MovieInfoHorizontal d-flex flex-row'>
       <Card.Header className=' d-flex flex-column align-content-center'>
@@ -14,7 +24,7 @@ const MovieInfoHorizontal = (props) => {
           <Card.Img
             id='moviePoster'
             alt='movie poster'
-            src={`https://image.tmdb.org/t/p/original${poster_path}`}
+            src={`${posterSrcLink}${poster_path}`}
             style={{ width: '200px' }}
           ></Card.Img>
         ) : (
@@ -29,12 +39,14 @@ const MovieInfoHorizontal = (props) => {
 
         <div className='d-flex flex-column align-items-end'>
           <Form.Check
+            onChange={(e) => handleCheck(e, title, poster_path)}
             type='switch'
             role='switch'
             id='seen-switch'
             label='Already seen it?'
           />
           <Form.Check
+            onChange={(e) => handleCheck(e)}
             type='switch'
             role='switch'
             id='wantto-switch'
