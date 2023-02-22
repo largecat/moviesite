@@ -28,6 +28,7 @@
 
 .card-img {
   width: 100%;
+  width: 200px;
   box-shadow: 10px 50px 200px 10px rgba(255, 255, 255, 0.24);
   transition: all 0.3s ease-in-out;
   -webkit-transition: all 0.3s ease-in-out;
@@ -46,6 +47,4 @@
 .card-btns > a > button {
   margin: 20px;
   font-weight: 100;
-  /* height: auto; */
-  /* font-size: 1rem; */
 }

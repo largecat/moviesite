@@ -46,7 +46,7 @@ export const registerNewUser = async (auth, email, password, name) => {
       photoURL: '#',
     });
     const userId = userCredential.user.uid;
-    // const usersRef = collection(db, 'users');
+
     await setDoc(doc(db, '/users', userId), {
       uid: userId,
       displayName: name,
@@ -54,13 +54,6 @@ export const registerNewUser = async (auth, email, password, name) => {
       favorites: [],
     });
 
-    // setDoc(
-    //   doc(usersRef, userId, {
-    //     uid: userId,
-    //     displayName: name,
-    //     favColor: 'orange',
-    //   })
-    // );
     console.log(userCredential);
     console.log(userId);
   } catch (error) {
@@ -75,8 +68,7 @@ export const signInUser = async (auth, email, password) => {
   try {
     await signInWithEmailAndPassword(auth, email, password).then((response) => {
       const user = response.user;
-      console.log('~~user logged in~~');
-      // console.log('user info:', user);
+
       // sessionStorage.setItem(
       //   'Auth Token',
       //   response._tokenResponse.refreshToken
@@ -94,6 +86,23 @@ export const logOut = () => {
   signOut(auth);
 };
 
-export const updateUserData = (auth, e) => {};
+export const updateUserData = async (auth, id, e, list) => {
+  const movieRef = collection(db, 'users', auth.currentUser.uid, 'movies', id);
+  setDoc(
+    movieRef,
+    {
+      isFavorite: true,
+    },
+    { merge: true }
+  );
+
+  // if (list === 'favorites') {
+  //   const docRef = doc(db, 'users', auth.currentUser.uid);
+  //   const docSnap = await getDoc(docRef);
+  //   if (docSnap) {
+  //     console.log(docSnap.data());
+  //   }
+  // }
+};
 
 export const writeUserData = async () => {};

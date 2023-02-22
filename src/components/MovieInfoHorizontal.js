@@ -1,11 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Card, Header, Form } from 'react-bootstrap';
+import { UserContext } from '../UserContext';
 
 const MovieInfoHorizontal = (props) => {
-  const { title, overview, release_date, poster_path, vote_average } =
-    props.movie;
+  const { currentUser, recentlyWatched, setRecentlyWatched } =
+    useContext(UserContext);
+  const {
+    id,
+    isFavorite,
+    onFav,
+    title,
+    overview,
+    release_date,
+    poster_path,
+    vote_average,
+    addMovieToList,
+  } = props;
 
   const posterSrcLink = 'https://image.tmdb.org/t/p/original';
+
+  const isWatched = recentlyWatched.some((movie) => {
+    console.log(movie.id);
+    return movie.id === id;
+  });
 
   const handleCheck = (e, title, poster_path) => {
     console.log('checkedd');
@@ -15,7 +32,7 @@ const MovieInfoHorizontal = (props) => {
   };
 
   return (
-    <Card className='MovieInfoHorizontal d-flex flex-row'>
+    <Card className='MovieInfoHorizontal d-flex flex-row' width='200px'>
       <Card.Header className=' d-flex flex-column align-content-center'>
         <Card.Title>
           {title} - {`(${release_date})`}
@@ -25,7 +42,6 @@ const MovieInfoHorizontal = (props) => {
             id='moviePoster'
             alt='movie poster'
             src={`${posterSrcLink}${poster_path}`}
-            style={{ width: '200px' }}
           ></Card.Img>
         ) : (
           <div style={{ width: '200px' }}>No Poster</div>
@@ -39,21 +55,23 @@ const MovieInfoHorizontal = (props) => {
 
         <div className='d-flex flex-column align-items-end'>
           <Form.Check
-            onChange={(e) => handleCheck(e, title, poster_path)}
             type='switch'
-            role='switch'
             id='seen-switch'
-            label='Already seen it?'
+            onChange={(e) => {
+              addMovieToList();
+            }}
+            label={isWatched ? 'already seen' : 'already seen it?'}
+            checked={isWatched}
+            // checked={isRecentlyWatched ? true : false}
+            role='switch'
           />
           <Form.Check
-            onChange={(e) => handleCheck(e)}
             type='switch'
-            role='switch'
             id='wantto-switch'
-            label='Wanna see?'
+            label='wanna watch?'
+            role='switch'
           />
         </div>
-        {/* <Form.Check type='switch' id='custom-switch' label='Already seen it?' /> */}
       </Card.Body>
     </Card>
   );

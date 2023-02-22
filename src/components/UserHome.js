@@ -48,7 +48,7 @@ const UserHome = () => {
           <div className='userHome-main'>
             <div className='userHome-list'>
               <h2>Favorites:</h2>
-              <div className='.home-favContainer d-flex'>
+              <div className='home-movieContainer d-flex'>
                 {favorites
                   ? favorites.map((movie) => {
                       console.log(movie.id);
@@ -71,24 +71,25 @@ const UserHome = () => {
             </div>
             <div className='userHome-list'>
               <h2>Recently Watched:</h2>
-
-              {recentlyWatched
-                ? recentlyWatched.map((movie) => {
-                    return (
-                      <MovieInfoVertical
-                        key={movie.id}
-                        movie={movie}
-                        // movies={movies}
-                        // key={movie.id}
-                        title={movie.title}
-                        overview={movie.overview}
-                        release_date={movie.release_date}
-                        poster_path={movie.poster_path}
-                        vote_average={movie.vote_average}
-                      />
-                    );
-                  })
-                : console.log('no recently watched')}
+              <div className='home-movieContainer d-flex'>
+                {recentlyWatched
+                  ? recentlyWatched.map((movie) => {
+                      return (
+                        <MovieInfoVertical
+                          key={movie.id}
+                          movie={movie}
+                          // movies={movies}
+                          // key={movie.id}
+                          title={movie.title}
+                          overview={movie.overview}
+                          release_date={movie.release_date}
+                          poster_path={movie.poster_path}
+                          vote_average={movie.vote_average}
+                        />
+                      );
+                    })
+                  : console.log('no recently watched')}
+              </div>
             </div>
             <div className='userHome-list'>
               <h2>Want to Watch:</h2>
@@ -101,11 +102,3 @@ const UserHome = () => {
 };
 
 export default UserHome;
-
-{
-  /* {currentUser.recentlyWatched
-                ? currentUser.recentlyWatched.map((item) => {
-                    return <div>{item.name}</div>;
-                  })
-                : console.log('asdfasdfasdf')} */
-}
