@@ -1,7 +1,6 @@
 // Import the functions you need from the SDKs you need
 
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore/lite';
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -9,6 +8,7 @@ import {
   signOut,
   updateProfile,
 } from 'firebase/auth';
+import { setDoc, doc, collection, getFirestore } from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 
@@ -30,7 +30,7 @@ export const auth = getAuth(app);
 
 export const registerNewUser = async (auth, email, password, name) => {
   try {
-    const user = await createUserWithEmailAndPassword(
+    const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
       password
@@ -45,6 +45,17 @@ export const registerNewUser = async (auth, email, password, name) => {
       displayName: name,
       photoURL: '#',
     });
+    const userId = userCredential.user.uid;
+
+    await setDoc(doc(db, '/users', userId), {
+      uid: userId,
+      displayName: name,
+      recentlyWatched: [],
+      favorites: [],
+    });
+
+    console.log(userCredential);
+    console.log(userId);
   } catch (error) {
     console.log(error);
     console.log(error.code);
@@ -57,8 +68,7 @@ export const signInUser = async (auth, email, password) => {
   try {
     await signInWithEmailAndPassword(auth, email, password).then((response) => {
       const user = response.user;
-      console.log('~~user logged in~~');
-      // console.log('user info:', user);
+
       // sessionStorage.setItem(
       //   'Auth Token',
       //   response._tokenResponse.refreshToken
@@ -75,7 +85,3 @@ export const signInUser = async (auth, email, password) => {
 export const logOut = () => {
   signOut(auth);
 };
-
-export const updateUserData = (auth, e) => {};
-
-export const writeUserData = async () => {};

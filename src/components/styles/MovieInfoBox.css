@@ -5,10 +5,31 @@
   color: #edb183;
   min-height: 40px;
 }
-.MovieInfoVertical {
-  max-width: 250px;
+
+#moviePoster {
+  min-width: 200px;
+  max-width: 200px;
+}
+.MovieInfoHorizontal > .MovieInfoVertical {
+  min-width: 200px;
+  max-width: 200px;
   height: auto;
 }
+
+.MovieInfoVertical.card {
+  min-width: 200px;
+  margin: 0 5px;
+}
+
+/* .MovieInfoVertical { */
+/* max-width: 250px; */
+/* height: auto; */
+
+/* display: flex; */
+
+/* max-width: 200px; */
+/* } */
+
 /* .MovieInfoBoxToggle,
 .MovieInfoHorizontal,
 .MovieInfoVertical,

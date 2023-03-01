@@ -4,7 +4,7 @@ import { db } from '../Firebase';
 import { doc, getDoc } from 'firebase/firestore/lite';
 
 const UserData = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { currentUser, setCurrentUser, favorites } = useContext(UserContext);
   const [docs, setDocs] = useState([]);
   const [recentMovies, setRecentMovies] = useState([]);
   const [wantMovies, setWantMovies] = useState([]);

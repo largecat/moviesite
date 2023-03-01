@@ -1,13 +1,14 @@
 import React, { useMemo, useState } from 'react';
 import Search from './Search';
 import { TMDB_API_KEY } from '../api';
-import MovieInfoBoxToggle from './MovieInfoBox';
 import './styles/SearchPage.css';
 import MovieInfoHorizontal from './MovieInfoHorizontal';
-
+import { updateUserData } from '../Firebase';
 const API_URL = 'https://api.themoviedb.org/3/search/movie?';
 
-const SearchPage = () => {
+const SearchPage = (props) => {
+  const { toggleChecked, checkAndUpdateMovie } = props;
+
   const [results, setResults] = useState([]);
   const [searchQ, setSearchQ] = useState('');
 
@@ -25,9 +26,7 @@ const SearchPage = () => {
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    // const searchValue = e.target.searchInput.value;
-    // console.log(searchQ);
-    // if (searchQ) {
+
     try {
       let res = await fetch(
         `${API_URL}api_key=${TMDB_API_KEY}&query=${searchQ}`
@@ -38,14 +37,11 @@ const SearchPage = () => {
         return item;
       });
       setResults(resArray);
-      console.log(resArray);
-      console.log(data.results);
     } catch (error) {
       console.log(error.code);
       console.log(error.message);
     }
     e.target.reset();
-    // }
   };
 
   return (
@@ -56,25 +52,24 @@ const SearchPage = () => {
         results={results}
         setResults={setResults}
       />
+
       <div className='results-display'>
         {results.length > 0 && <h4>Results for "{searchQ}"</h4>}
         {results.map((movie) => {
           return (
-            // <div key={movie.id}>
             <MovieInfoHorizontal
               key={movie.id}
               movie={movie}
-              // movies={movies}
-              // key={movie.id}
+              id={movie.id}
               title={movie.title}
               overview={movie.overview}
               release_date={movie.release_date}
               poster_path={movie.poster_path}
               vote_average={movie.vote_average}
+              isFavorite={movie.isFavorite}
+              checkAndUpdateMovie={checkAndUpdateMovie}
             />
-            // </div>
           );
-          //   return <p key={item.id}>{item.original_title}</p>;
         })}
       </div>
     </div>

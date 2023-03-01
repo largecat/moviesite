@@ -1,11 +1,46 @@
-import React from 'react';
-import { Card, Header, Form } from 'react-bootstrap';
+import React, { useContext } from 'react';
+import { Card, Form } from 'react-bootstrap';
+import { UserContext } from '../UserContext';
 
 const MovieInfoHorizontal = (props) => {
-  const { title, overview, release_date, poster_path, vote_average } =
-    props.movie;
+  const { watched, favorites, wantToWatch } = useContext(UserContext);
+  const {
+    movie,
+    id,
+    title,
+    overview,
+    release_date,
+    poster_path,
+    vote_average,
+    checkAndUpdateMovie,
+  } = props;
+
+  const posterSrcLink = 'https://image.tmdb.org/t/p/original';
+
+  const isWatched = watched.some((movie) => {
+    return movie.id === id;
+  });
+
+  const isFav = favorites.some((movie) => {
+    return movie.id === id;
+  });
+
+  const isWantToWatch = wantToWatch.some((movie) => {
+    return movie.id === id;
+  });
+
+  const handleCheck = (e) => {
+    if (e.target.id === 'watched-switch') {
+      checkAndUpdateMovie(e, 'watched', movie);
+    } else if (e.target.id === 'wantto-switch') {
+      checkAndUpdateMovie(e, 'wantToWatch', movie);
+    } else if (e.target.id === 'fav-switch') {
+      checkAndUpdateMovie(e, 'isFavorite', movie);
+    }
+  };
+
   return (
-    <Card className='MovieInfoHorizontal d-flex flex-row'>
+    <Card className='MovieInfoHorizontal d-flex flex-row' width='200px'>
       <Card.Header className=' d-flex flex-column align-content-center'>
         <Card.Title>
           {title} - {`(${release_date})`}
@@ -14,8 +49,7 @@ const MovieInfoHorizontal = (props) => {
           <Card.Img
             id='moviePoster'
             alt='movie poster'
-            src={`https://image.tmdb.org/t/p/original${poster_path}`}
-            style={{ width: '200px' }}
+            src={`${posterSrcLink}${poster_path}`}
           ></Card.Img>
         ) : (
           <div style={{ width: '200px' }}>No Poster</div>
@@ -30,18 +64,35 @@ const MovieInfoHorizontal = (props) => {
         <div className='d-flex flex-column align-items-end'>
           <Form.Check
             type='switch'
+            id='watched-switch'
+            onChange={(e) => {
+              handleCheck(e);
+            }}
+            label={isWatched ? 'already seen' : 'already seen it?'}
+            checked={isWatched}
             role='switch'
-            id='seen-switch'
-            label='Already seen it?'
           />
           <Form.Check
             type='switch'
-            role='switch'
             id='wantto-switch'
-            label='Wanna see?'
+            onChange={(e) => {
+              handleCheck(e);
+            }}
+            label={isWantToWatch ? 'on your watch list' : 'wanna watch?'}
+            checked={isWantToWatch}
+            role='switch'
+          />
+          <Form.Check
+            type='switch'
+            id='fav-switch'
+            onChange={(e) => {
+              handleCheck(e);
+            }}
+            label={isFav ? 'one of your faves!' : 'add to favorites?'}
+            checked={isFav}
+            role='switch'
           />
         </div>
-        {/* <Form.Check type='switch' id='custom-switch' label='Already seen it?' /> */}
       </Card.Body>
     </Card>
   );

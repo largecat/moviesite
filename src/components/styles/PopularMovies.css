@@ -1,4 +1,11 @@
+/* .PopularMovies {
+  display: flex;
+  overflow: scroll;
+} */
+
 .PopularMovies {
+  /* min-height: 400px; */
+
   display: flex;
   overflow: scroll;
 }

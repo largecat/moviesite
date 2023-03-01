@@ -34,6 +34,7 @@
   display: flex;
   flex-direction: column;
   padding: 5px 10px;
+  overflow: scroll;
 }
 
 .userHome-userImage {
@@ -46,8 +47,16 @@
 
 .userHome-list {
   /* background-color: rgb(32, 48, 42); */
-  min-height: 300px;
+  /* min-height: 300px; */
+  height: auto;
   margin: 10px 0;
   padding: 5px 10px;
   border: 1px solid rgb(32, 48, 42);
 }
+
+.home-favContainer {
+  height: 200px;
+}
+/* div > .MovieInfoVertical {
+  height: 300px;
+} */
