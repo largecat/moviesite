@@ -7,7 +7,7 @@ import { updateUserData } from '../Firebase';
 const API_URL = 'https://api.themoviedb.org/3/search/movie?';
 
 const SearchPage = (props) => {
-  const { addMovieToList } = props;
+  const { toggleChecked, checkAndUpdateMovie } = props;
 
   const [results, setResults] = useState([]);
   const [searchQ, setSearchQ] = useState('');
@@ -67,7 +67,7 @@ const SearchPage = (props) => {
               poster_path={movie.poster_path}
               vote_average={movie.vote_average}
               isFavorite={movie.isFavorite}
-              addMovieToList={addMovieToList}
+              checkAndUpdateMovie={checkAndUpdateMovie}
             />
           );
         })}

@@ -7,7 +7,7 @@ import { UserContext } from '../UserContext';
 import MovieInfoVertical from './MovieInfoVertical';
 
 const UserHome = () => {
-  const { currentUser, setCurrentUser, favorites, recentlyWatched } =
+  const { currentUser, setCurrentUser, favorites, watched, wantToWatch } =
     useContext(UserContext);
 
   let navigate = useNavigate();
@@ -50,14 +50,11 @@ const UserHome = () => {
               <h2>Favorites:</h2>
               <div className='home-movieContainer d-flex'>
                 {favorites
-                  ? favorites.map((movie) => {
-                      console.log(movie.id);
+                  ? favorites.map((movie, index) => {
                       return (
                         <MovieInfoVertical
-                          key={movie.id}
+                          key={index}
                           movie={movie}
-                          // movies={movies}
-                          // key={movie.id}
                           title={movie.title}
                           overview={movie.overview}
                           release_date={movie.release_date}
@@ -70,16 +67,14 @@ const UserHome = () => {
               </div>
             </div>
             <div className='userHome-list'>
-              <h2>Recently Watched:</h2>
+              <h2>Watched:</h2>
               <div className='home-movieContainer d-flex'>
-                {recentlyWatched
-                  ? recentlyWatched.map((movie) => {
+                {watched
+                  ? watched.map((movie, index) => {
                       return (
                         <MovieInfoVertical
-                          key={movie.id}
+                          key={index}
                           movie={movie}
-                          // movies={movies}
-                          // key={movie.id}
                           title={movie.title}
                           overview={movie.overview}
                           release_date={movie.release_date}
@@ -88,11 +83,29 @@ const UserHome = () => {
                         />
                       );
                     })
-                  : console.log('no recently watched')}
+                  : console.log('nothing watched')}
               </div>
             </div>
             <div className='userHome-list'>
-              <h2>Want to Watch:</h2>
+              <h2>To Watch:</h2>
+              <div className='home-movieContainer d-flex'>
+                {console.log(wantToWatch)}
+                {wantToWatch
+                  ? wantToWatch.map((movie, index) => {
+                      return (
+                        <MovieInfoVertical
+                          key={index}
+                          movie={movie}
+                          title={movie.title}
+                          overview={movie.overview}
+                          release_date={movie.release_date}
+                          poster_path={movie.poster_path}
+                          vote_average={movie.vote_average}
+                        />
+                      );
+                    })
+                  : console.log('nothing to watch')}
+              </div>
             </div>
           </div>
         </>

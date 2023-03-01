@@ -85,24 +85,3 @@ export const signInUser = async (auth, email, password) => {
 export const logOut = () => {
   signOut(auth);
 };
-
-export const updateUserData = async (auth, id, e, list) => {
-  const movieRef = collection(db, 'users', auth.currentUser.uid, 'movies', id);
-  setDoc(
-    movieRef,
-    {
-      isFavorite: true,
-    },
-    { merge: true }
-  );
-
-  // if (list === 'favorites') {
-  //   const docRef = doc(db, 'users', auth.currentUser.uid);
-  //   const docSnap = await getDoc(docRef);
-  //   if (docSnap) {
-  //     console.log(docSnap.data());
-  //   }
-  // }
-};
-
-export const writeUserData = async () => {};

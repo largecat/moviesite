@@ -1,34 +1,42 @@
 import React, { useContext } from 'react';
-import { Card, Header, Form } from 'react-bootstrap';
+import { Card, Form } from 'react-bootstrap';
 import { UserContext } from '../UserContext';
 
 const MovieInfoHorizontal = (props) => {
-  const { currentUser, recentlyWatched, setRecentlyWatched } =
-    useContext(UserContext);
+  const { watched, favorites, wantToWatch } = useContext(UserContext);
   const {
+    movie,
     id,
-    isFavorite,
-    onFav,
     title,
     overview,
     release_date,
     poster_path,
     vote_average,
-    addMovieToList,
+    checkAndUpdateMovie,
   } = props;
 
   const posterSrcLink = 'https://image.tmdb.org/t/p/original';
 
-  const isWatched = recentlyWatched.some((movie) => {
-    console.log(movie.id);
+  const isWatched = watched.some((movie) => {
     return movie.id === id;
   });
 
-  const handleCheck = (e, title, poster_path) => {
-    console.log('checkedd');
-    console.log(e.target.checked);
-    console.log(title);
-    console.log(poster_path);
+  const isFav = favorites.some((movie) => {
+    return movie.id === id;
+  });
+
+  const isWantToWatch = wantToWatch.some((movie) => {
+    return movie.id === id;
+  });
+
+  const handleCheck = (e) => {
+    if (e.target.id === 'watched-switch') {
+      checkAndUpdateMovie(e, 'watched', movie);
+    } else if (e.target.id === 'wantto-switch') {
+      checkAndUpdateMovie(e, 'wantToWatch', movie);
+    } else if (e.target.id === 'fav-switch') {
+      checkAndUpdateMovie(e, 'isFavorite', movie);
+    }
   };
 
   return (
@@ -56,19 +64,32 @@ const MovieInfoHorizontal = (props) => {
         <div className='d-flex flex-column align-items-end'>
           <Form.Check
             type='switch'
-            id='seen-switch'
+            id='watched-switch'
             onChange={(e) => {
-              addMovieToList();
+              handleCheck(e);
             }}
             label={isWatched ? 'already seen' : 'already seen it?'}
             checked={isWatched}
-            // checked={isRecentlyWatched ? true : false}
             role='switch'
           />
           <Form.Check
             type='switch'
             id='wantto-switch'
-            label='wanna watch?'
+            onChange={(e) => {
+              handleCheck(e);
+            }}
+            label={isWantToWatch ? 'on your watch list' : 'wanna watch?'}
+            checked={isWantToWatch}
+            role='switch'
+          />
+          <Form.Check
+            type='switch'
+            id='fav-switch'
+            onChange={(e) => {
+              handleCheck(e);
+            }}
+            label={isFav ? 'one of your faves!' : 'add to favorites?'}
+            checked={isFav}
             role='switch'
           />
         </div>
